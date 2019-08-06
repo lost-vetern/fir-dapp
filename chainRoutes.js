@@ -12,7 +12,10 @@ module.exports = function(app,auth){
             }
         });
     });
-    
+
+    app.get('/addfir',auth,(req,res)=>{
+        res.render('addfir');
+    });
     app.post('/addFIR',auth,(req,res)=>{
         block.find({},function(err,dbres){
             if(err)console.log(err);

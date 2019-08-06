@@ -4,10 +4,12 @@ var express = require('express'),
     passport = require('passport'),
     session = require('express-session'),
     user = require('./user'),
+    axios = require('axios'),
     localStrategy = require('passport-local');
 
 var app=express();
 
+app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
@@ -22,8 +24,18 @@ passport.deserializeUser(user.deserializeUser());
 
 mongoose.connect('mongodb://localhost:27017/fir');
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 app.get('/fail',(req,res)=>{
     res.json({msg:':('});
+});
+
+app.get('/signup',(req,res)=>{
+    res.render('signup');
 });
 
 app.post('/signup',(req,res)=>{
@@ -31,13 +43,17 @@ app.post('/signup',(req,res)=>{
         username: req.body.username
     }),req.body.password,function(err,user){
         if(err)res.json({msg:err});
-        res.json({msg:user});
+        res.render('signin');
     });
+});
+
+app.get('/signin',(req,res)=>{
+    res.render('signin');
 });
 
 app.post('/signin',passport.authenticate('local'),(req,res)=>{
     console.log('i am here');
-    res.json({msg: 'signed in'});
+    res.render('addfir');
 });
 
 
