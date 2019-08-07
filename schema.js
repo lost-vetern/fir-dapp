@@ -10,7 +10,7 @@ var schema = new mongoose.Schema({
         location : String,
         complaint : String,
         victims : [String],
-        accussed : [{name : String, description : String}],
+        accused : [{name : String, description : String}],
         witness : [{name : String, address : String}],
         offenseSections : [String] 
      

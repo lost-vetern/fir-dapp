@@ -13,6 +13,28 @@ module.exports = function(app,auth){
         });
     });
 
+    //fir by firnumber
+    app.post('/firlistbynumber',(req,res)=>{
+        block.find({firNumber:req.body.firNumber},function(err,dbres){
+            if(err)console.log(err);
+            else{
+                console.log(dbres);
+                res.json({FIR:dbres});    
+            }
+        });
+    });
+
+        //fir by caseTitle
+        app.post('/firlistbycasetitle',(req,res)=>{
+            block.find({caseTitle:req.body.caseTitle},function(err,dbres){
+                if(err)console.log(err);
+                else{
+                    console.log(dbres);
+                    res.json({FIR:dbres});    
+                }
+            });
+        });
+
     app.get('/addfir',auth,(req,res)=>{
         res.render('addfir');
     });
@@ -50,7 +72,7 @@ module.exports = function(app,auth){
                     location:req.body.location,
                     complaint:req.body.complaint,
                     victims:req.body.victims,
-                    accussed:req.body.accussed,
+                    accused:req.body.accused,
                     witness:req.body.witness,
                     offenseSections : req.body.offenseSections 
                 }),function(err,dbres){
