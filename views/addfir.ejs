@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+<h1 style="text-align: center" >Fir Entry</h1>
   <div id="app" class="container">
     <form action="#">
       <div v-for="(item,index) in form" class="row">
@@ -175,7 +175,9 @@
                url : '/addfir',
                data : this.form[0]
            })
-           .then(data=>console.log(data))
+           .then(data=>{
+             location.reload();
+           })
            .catch(err=>console.log(err)); 
         }
       },
