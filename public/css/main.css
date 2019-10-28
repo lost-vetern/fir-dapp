@@ -463,7 +463,7 @@ iframe {
 .heading {
     font-weight: bold;
     font-size: 18px;
-    text-align: center
+    /* text-align: center */
 }
 
 .c-label {
